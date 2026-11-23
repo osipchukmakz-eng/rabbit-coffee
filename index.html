@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rabbit Coffee Place — Спешелті кав’ярня у Харкові</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@600;700;800&display=swap');
+
+        :root {
+            --bg: #F6F4EF;
+            --bg-dark: #141312;
+            --text: #141312;
+            --text-light: #F6F4EF;
+            --muted: #6E6A63;
+            --accent: #D96B27;
+            --border: rgba(20, 19, 18, 0.14);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Кастомний курсор у стилі креативних студій (bearideas) */
+        .cursor-dot, .cursor-ring {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.25s ease, height 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+        }
+        .cursor-ring {
+            width: 38px;
+            height: 38px;
+            border: 1px solid rgba(20, 19, 18, 0.45);
+        }
+        body.cursor-hover .cursor-ring {
+            width: 68px;
+            height: 68px;
+            background: rgba(217, 107, 39, 0.12);
+            border-color: var(--accent);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.4rem 4vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(246, 244, 239, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        nav {
+            display: flex;
+            gap: 2.2rem;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.92rem;
+            font-weight: 500;
+            position: relative;
+            padding: 0.2rem 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 1.5px;
+            background: var(--accent);
+            transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section з editorial-типографікою */
+        .hero {
+            padding: 11rem 4vw 5rem;
+            min-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hero-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .hero-label::before {
+            content: '';
+            width: 28px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .hero-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.8rem, 7.2vw, 6.8rem);
+            font-weight: 800;
+            line-height: 0.96;
+            letter-spacing: -0.04em;
+            max-width: 1200px;
+        }
+
+        .line-wrap {
+            overflow: hidden;
+            display: block;
+        }
+
+        .line-inner {
+            display: block;
+            transform: translateY(105%);
+            animation: slideUpText 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .line-wrap:nth-child(2) .line-inner { animation-delay: 0.12s; }
+        .line-wrap:nth-child(3) .line-inner { animation-delay: 0.24s; }
+
+        .hero-title em {
+            font-style: italic;
+            font-family: Georgia, serif;
+            font-weight: 400;
+            color: var(--accent);
+        }
+
+        @keyframes slideUpText {
+            to { transform: translateY(0); }
+        }
+
+        .hero-bottom {
+            margin-top: 4rem;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 2rem;
+            align-items: end;
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+        }
+
+        .hero-desc {
+            font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+            color: var(--muted);
+            max-width: 560px;
+        }
+
+        .magnetic-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: var(--text);
+            color: var(--text-light);
+            padding: 1.1rem 2.1rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+        }
+
+        .magnetic-btn:hover {
+            background: var(--accent);
+        }
+
+        /* Рухомий рядок (Marquee) */
+        .marquee-section {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 1.3rem 0;
+            overflow: hidden;
+            background: var(--bg);
+            white-space: nowrap;
+        }
+
+        .marquee-track {
+            display: inline-flex;
+            animation: marqueeScroll 24s linear infinite;
+        }
+
+        .marquee-section:hover .marquee-track {
+            animation-play-state: paused;
+        }
+
+        .marquee-item {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            padding: 0 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .marquee-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Галерея фото кав’ярні з анімацією розкриття */
+        .section {
+            padding: 6.5rem 4vw;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.6rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.8rem;
+        }
+
+        .photo-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            background: #e7e2d8;
+        }
+
+        .photo-card:nth-child(1) { grid-column: span 7; height: 480px; }
+        .photo-card:nth-child(2) { grid-column: span 5; height: 480px; }
+        .photo-card:nth-child(3) { grid-column: span 5; height: 420px; }
+        .photo-card:nth-child(4) { grid-column: span 7; height: 420px; }
+
+        .photo-img-wrap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            clip-path: inset(12% 0 12% 0 round 16px);
+            opacity: 0;
+            transform: scale(1.08);
+            transition: clip-path 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                        opacity 0.9s ease,
+                        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .photo-card.is-visible .photo-img-wrap {
+            clip-path: inset(0% 0 0% 0 round 16px);
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.06);
+        }
+
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.8rem;
+            background: linear-gradient(to top, rgba(20, 19, 18, 0.78), transparent);
+            color: #fff;
+            transform: translateY(12px);
+            opacity: 0.9;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .photo-card:hover .photo-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .photo-overlay h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .photo-overlay p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Блок філософії (Pillars) */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            border-top: 1px solid var(--border);
+            padding-top: 3rem;
+        }
+
+        .pillar-card {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.45);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-6px);
+            background: #ffffff;
+        }
+
+        .pillar-num {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1.2rem;
+        }
+
+        .pillar-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.45rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .pillar-card p {
+            color: var(--muted);
+            font-size: 0.96rem;
+        }
+
+        /* Інтерактивне меню */
+        .menu-tabs {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--text);
+            color: var(--text-light);
+            border-color: var(--text);
+        }
+
+        .menu-panel {
+            display: none;
+            animation: fadeInPanel 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .menu-panel.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.2rem;
+        }
+
+        @keyframes fadeInPanel {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .menu-row {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1.2rem;
+            transition: padding-left 0.3s ease, background-color 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .menu-row:hover {
+            padding-left: 1.9rem;
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .menu-row h4 {
+            font-size: 1.12rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .menu-row p {
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        .menu-price {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--accent);
+            white-space: nowrap;
+        }
+
+        /* Реальні відгуки з Google Карт */
+        .rating-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.85rem 1.4rem;
+            border-radius: 100px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            text-decoration: none;
+            color: var(--text);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .rating-badge:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        .rating-score {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text);
+        }
+
+        .rating-stars {
+            color: #F4B400;
+            letter-spacing: 2px;
+            font-size: 1.05rem;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 1.6rem;
+        }
+
+        .review-card {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1.5rem;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(20, 19, 18, 0.06);
+        }
+
+        .review-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .google-tag {
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--muted);
+            background: var(--bg);
+            padding: 0.3rem 0.75rem;
+            border-radius: 100px;
+        }
+
+        .review-text {
+            font-size: 1rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.1rem;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .author-info strong {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .author-info span {
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        /* Темний фінальний блок контактів та бронювання */
+        .dark-section {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            padding: 6.5rem 4vw 3rem;
+            border-radius: 28px 28px 0 0;
+        }
+
+        .booking-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 5rem;
+        }
+
+        .dark-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.2rem, 4.2vw, 3.8rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+
+        .dark-title span {
+            color: var(--accent);
+        }
+
+        .contact-list {
+            list-style: none;
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .contact-list li span {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #9A958D;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-list a, .contact-list p {
+            color: var(--text-light);
+            font-size: 1.15rem;
+            text-decoration: none;
+        }
+
+        .contact-list a:hover {
+            color: var(--accent);
+        }
+
+        .booking-form {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 2.5rem;
+            border-radius: 20px;
+        }
+
+        .form-field {
+            margin-bottom: 1.3rem;
+        }
+
+        .form-field label {
+            display: block;
+            font-size: 0.85rem;
+            color: #B5AFA6;
+            margin-bottom: 0.45rem;
+        }
+
+        .form-field input, .form-field select {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-field input:focus, .form-field select:focus {
+            border-color: var(--accent);
+        }
+
+        .form-field select option {
+            background: #1c1a18;
+            color: #fff;
+        }
+
+        .flash-msg {
+            display: none;
+            background: rgba(217, 107, 39, 0.22);
+            border: 1px solid var(--accent);
+            color: #ffd8be;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            color: #8E8981;
+            font-size: 0.9rem;
+        }
+
+        /* Клас появи при скролі */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 860px) {
+            .hero-bottom, .booking-layout {
+                grid-template-columns: 1fr;
+            }
+            .photo-card:nth-child(n) {
+                grid-column: span 12;
+                height: 340px;
+            }
+            .cursor-dot, .cursor-ring {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <header>
+        <a href="#" class="logo hover-target"><span></span>RABBIT COFFEE</a>
+        <nav>
+            <a href="#gallery" class="hover-target">Атмосфера</a>
+            <a href="#about" class="hover-target">Підхід</a>
+            <a href="#menu" class="hover-target">Меню</a>
+            <a href="#reviews" class="hover-target">Відгуки</a>
+            <a href="#booking" class="hover-target">Бронь</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div>
+            <div class="hero-label">Харків · Вірменський провулок, 2</div>
+            <h1 class="hero-title">
+                <span class="line-wrap"><span class="line-inner">Rabbit Coffee,</span></span>
+                <span class="line-wrap"><span class="line-inner">власне <em>обсмажування</em> &amp;</span></span>
+                <span class="line-wrap"><span class="line-inner">кондитерська</span></span>
+            </h1>
+        </div>
+
+        <div class="hero-bottom">
+            <p class="hero-desc">Ми віримо, що кава — це не просто ранкова звичка, а культура смаку, живе спілкування та увага до кожної деталі: від вибору зеленого зерна до авторського десерту на вашій тарілці.</p>
+            <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:flex-end;">
+                <a href="#menu" class="magnetic-btn hover-target">Відкрити карту напоїв →</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="marquee-section">
+        <div class="marquee-track">
+            <div class="marquee-item">Specialty Coffee <span class="marquee-dot"></span></div>
+            <div class="marquee-item">Власне обсмажування з 2013 <span class="marquee-dot"></span></div>
+            <div class="marquee-item">Авторські десерти <span class="marquee-dot"></span></div>
+            <div class="marquee-item">V60 &amp; Фільтр <span class="marquee-dot"></span></div>
+            <div class="marquee-item">Dog-Friendly <span class="marquee-dot"></span></div>
+            <div class="marquee-item">Specialty Coffee <span class="marquee-dot"></span></div>
+            <div class="marquee-item">Власне обсмажування з 2013 <span class="marquee-dot"></span></div>
+            <div class="marquee-item">Авторські десерти <span class="marquee-dot"></span></div>
+            <div class="marquee-item">V60 &amp; Фільтр <span class="marquee-dot"></span></div>
+            <div class="marquee-item">Dog-Friendly <span class="marquee-dot"></span></div>
+        </div>
+    </div>
+
+    <section id="gallery" class="section">
+        <div class="section-header reveal-up">
+            <h2 class="section-title">Усередині Rabbit<br>Coffee Place</h2>
+            <p style="color:var(--muted); max-width:380px;">Реальні кадри нашої кав’ярні у центрі Харкова — світла зала, аромат свіжого зерна та десерти.</p>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="photo-card reveal-up hover-target">
+                <div class="photo-img-wrap">
+                    <img src="https://lh3.googleusercontent.com/grass-cs/AABkmLf2t-cDe6xM9MLhWEaH2HPMBu2AIuKUZpRHuqmg8vwn0m0-WIMKvcrvcnCOhUvvt4_L26pgR26vpPKwSQZiIrJP4wEvT90OtLMK81fbhLX1qyPaqnGPSShsIEgzHR3eJGRyukhRqQ=k-no" alt="Інтер’єр & Атмосфера" loading="lazy">
+                </div>
+                <div class="photo-overlay">
+                    <h3>Інтер’єр &amp; Атмосфера</h3>
+                    <p>Світлий простір у Вірменському провулку</p>
+                </div>
+            </div>
+
+            <div class="photo-card reveal-up hover-target">
+                <div class="photo-img-wrap">
+                    <img src="https://lh3.googleusercontent.com/grass-cs/AABkmLcKMEWnGKAaakv3v2KWpiTFiDPs0WuWQDgtvQ6QsX-1tOEOQIpQN7-qn1NEJUOTsPkAo0RtdjXRLQR3fPWhzK2sGmx9tXur1LR0OloacCE5GR06yrfttSGSr-OA6vviVIbX64O--A=k-no" alt="Кава & Кондитерська" loading="lazy">
+                </div>
+                <div class="photo-overlay">
+                    <h3>Кава &amp; Кондитерська</h3>
+                    <p>Свіже обсмажування та десерти ручної роботи</p>
+                </div>
+            </div>
+
+            <div class="photo-card reveal-up hover-target">
+                <div class="photo-img-wrap">
+                    <img src="https://lh3.googleusercontent.com/grass-cs/AABkmLeODuCunKYipcq4RqpJSai903PnonJDkTa8z8nAhkN3dSM1g_Sf2v8j_10m-qL1CvIaRW5Toae43Rsi3znFowrStHuqf6fvwP5-oiD-sxzUf0By69C1Xv6fNxlbcyZubrm3nq5T1umq0c5M=k-no" alt="Деталі простору" loading="lazy">
+                </div>
+                <div class="photo-overlay">
+                    <h3>Деталі простору</h3>
+                    <p>Затишні місця для роботи та зустрічей</p>
+                </div>
+            </div>
+
+            <div class="photo-card reveal-up hover-target">
+                <div class="photo-img-wrap">
+                    <img src="https://lh3.googleusercontent.com/grass-cs/AABkmLevc32sM25alTd56nVEKKLWHdMWS7n73ELrZxx2s8BYd5DO_iTWDZlu2ZlK8eWkhAcT1qWb8aw8TYaPGOwewqVqCtYSbgQHxV-EEtWGMdUqy9BJadKdF6pp1KgWkKGkd9p82jGV9J2HZVRc=k-no" alt="Rabbit Coffee Place" loading="lazy">
+                </div>
+                <div class="photo-overlay">
+                    <h3>Rabbit Coffee Place</h3>
+                    <p>Вірменський провулок, 2</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section" style="padding-top:2rem;">
+        <div class="section-header reveal-up">
+            <h2 class="section-title">На чому будується<br>наш смак</h2>
+        </div>
+        <div class="pillars-grid">
+            <div class="pillar-card reveal-up hover-target">
+                <div class="pillar-num">01 / ПРИНЦИП</div>
+                <h3>Власне обсмажування</h3>
+                <p>Понад 6 років відбираємо та обсмажуємо спешелті-зерно з усього світу на професійному обладнанні.</p>
+            </div>
+            <div class="pillar-card reveal-up hover-target">
+                <div class="pillar-num">02 / ПРИНЦИП</div>
+                <h3>Власна кондитерська</h3>
+                <p>Готуємо авторські тарти, чизкейки та свіжу випічку щоранку спеціально до нашої кави.</p>
+            </div>
+            <div class="pillar-card reveal-up hover-target">
+                <div class="pillar-num">03 / ПРИНЦИП</div>
+                <h3>Простір для життя</h3>
+                <p>Інтер’єр від студії IK-architects, живі рослини, формат dog-friendly та зручні місця для роботи з ноутбуком.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="section">
+        <div class="section-header reveal-up">
+            <h2 class="section-title">Меню кав’ярні</h2>
+        </div>
+
+        <div class="menu-tabs reveal-up">
+            <button class="tab-btn hover-target active" onclick="switchTab(event, 'cat-1')">Класика &amp; Еспресо</button>
+            <button class="tab-btn hover-target" onclick="switchTab(event, 'cat-2')">Альтернатива &amp; Чай</button>
+            <button class="tab-btn hover-target" onclick="switchTab(event, 'cat-3')">Десерти &amp; Сніданки</button>
+        </div>
+
+        <div id="cat-1" class="menu-panel active">
+            <div class="menu-row hover-target">
+                <div>
+                    <h4>Еспресо / Допіо</h4>
+                    <p>Насичений бленд або моносорт свіжого обсмажування</p>
+                </div>
+                <div class="menu-price">65 / 80 ₴</div>
+            </div>
+            <div class="menu-row hover-target">
+                <div>
+                    <h4>Капучино</h4>
+                    <p>Баланс еспресо та шовковистої молочної піни</p>
+                </div>
+                <div class="menu-price">85 ₴</div>
+            </div>
+            <div class="menu-row hover-target">
+                <div>
+                    <h4>Флет Вайт</h4>
+                    <p>Подвійний еспресо з тонким шаром оксамитового молока</p>
+                </div>
+                <div class="menu-price">95 ₴</div>
+            </div>
+            <div class="menu-row hover-target">
+                <div>
+                    <h4>Лате</h4>
+                    <p>М’який кавово-молочний напій (є рослинне молоко)</p>
+                </div>
+                <div class="menu-price">95 ₴</div>
+            </div>
+            <div class="menu-row hover-target">
+                <div>
+                    <h4>Раф кава</h4>
+                    <p>Вершковий напій з натуральною бурбонською ваніллю</p>
+                </div>
+                <div class="menu-price">110 ₴</div>
+            </div>
+        </div>
+
+        <div id="cat-2" class="menu-panel">
+            <div class="menu-row hover-target">
+                <div>
+                    <h4>Фільтр-кава</h4>
+                    <p>Свіжозварена чорна кава з яскравим ягідним профілем</p>
+                </div>
+                <div class="menu-price">75 ₴</div>
+            </div>
+            <div class="menu-row hover-target">
+                <div>
+                    <h4>Воронка V60</h4>
+                    <p>Ручне заварювання обраного моносорту від наших бариста</p>
+                </div>
+                <div class="menu-price">115 ₴</div>
+            </div>
+            <div class="menu-row hover-target">
+                <div>
+                    <h4>Матча Лате</h4>
+                    <p>Японський церемоніальний зелений чай з молоком</p>
+                </div>
+                <div class="menu-price">110 ₴</div>
+            </div>
+            <div class="menu-row hover-target">
+                <div>
+                    <h4>Авторський чай</h4>
+                    <p>Обліпиха-імбир або вишня-імбир із натуральних ягід</p>
+                </div>
+                <div class="menu-price">95 ₴</div>
+            </div>
+        </div>
+
+        <div id="cat-3" class="menu-panel">
+            <div class="menu-row hover-target">
+                <div>
+                    <h4>Чизкейк Лотус Біскофф</h4>
+                    <p>Ніжний вершковий чизкейк з карамельним печивом</p>
+                </div>
+                <div class="menu-price">135 ₴</div>
+            </div>
+            <div class="menu-row hover-target">
+                <div>
+                    <h4>Шоколадний мус</h4>
+                    <p>Повітряний десерт на основі бельгійського шоколаду</p>
+                </div>
+                <div class="menu-price">125 ₴</div>
+            </div>
+            <div class="menu-row hover-target">
+                <div>
+                    <h4>Ожиновий тарт</h4>
+                    <p>Пісочна основа, заварний крем та свіжі ягоди</p>
+                </div>
+                <div class="menu-price">130 ₴</div>
+            </div>
+            <div class="menu-row hover-target">
+                <div>
+                    <h4>Круасан з мигдалевим кремом</h4>
+                    <p>Свіжа випічка власного виробництва</p>
+                </div>
+                <div class="menu-price">105 ₴</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Реальні відгуки гостей із Google Карт -->
+    <section id="reviews" class="section" style="padding-top:2rem;">
+        <div class="section-header reveal-up">
+            <div>
+                <h2 class="section-title">Що кажуть гості<br>на Google Картах</h2>
+            </div>
+            <a href="https://www.google.com/maps/place/Rabbit+coffee+place/@49.9883284,36.2337118,17z" target="_blank" class="rating-badge hover-target">
+                <span class="rating-score">4.6</span>
+                <div>
+                    <div class="rating-stars">★★★★★</div>
+                    <div style="font-size:0.8rem; color:var(--muted);">303+ відгуки у Google Maps ↗</div>
+                </div>
+            </a>
+        </div>
+
+        <div class="reviews-grid">
+            <div class="review-card reveal-up hover-target">
+                <div>
+                    <div class="review-top">
+                        <span class="rating-stars">★★★★★</span>
+                        <span class="google-tag">Google Maps</span>
+                    </div>
+                    <p class="review-text" style="margin-top:1.2rem;">
+                        «Смачна кава, привітливі дівчата! Завжди з посмішкою, завжди з побажаннями гарного дня. Заклад дружній до чотирилапих, а постійні хвостаті гості — на стіні пошани. Рекомендую на 100%.»
+                    </p>
+                </div>
+                <div class="review-author">
+                    <div class="author-avatar">ВК</div>
+                    <div class="author-info">
+                        <strong>Володимир Костенко</strong>
+                        <span>Відгук у Google · липень 2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-card reveal-up hover-target">
+                <div>
+                    <div class="review-top">
+                        <span class="rating-stars">★★★★★</span>
+                        <span class="google-tag">Google Maps</span>
+                    </div>
+                    <p class="review-text" style="margin-top:1.2rem;">
+                        «Це любов з першого ковтка. Кава неймовірно смачна, атмосфера тепла, а сервіс на високому рівні. Місце у самому центрі, куди хочеться повертатися знову і знову.»
+                    </p>
+                </div>
+                <div class="review-author">
+                    <div class="author-avatar">ЛЗ</div>
+                    <div class="author-info">
+                        <strong>Лілія Зінченко</strong>
+                        <span>Відгук у Google · 5.0 / 5.0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-card reveal-up hover-target">
+                <div>
+                    <div class="review-top">
+                        <span class="rating-stars">★★★★★</span>
+                        <span class="google-tag">Google Maps</span>
+                    </div>
+                    <p class="review-text" style="margin-top:1.2rem;">
+                        «У центрі уваги в Rabbit у Вірменському провулку — кава власного обсмажування. Вибір виходить далеко за межі класичного еспресо: чудовий фільтр та ручна воронка V60.»
+                    </p>
+                </div>
+                <div class="review-author">
+                    <div class="author-avatar">LG</div>
+                    <div class="author-info">
+                        <strong>Local Guide · Google</strong>
+                        <span>Підтверджений візит у Харкові</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="dark-section">
+        <div class="booking-layout">
+            <div class="reveal-up">
+                <h2 class="dark-title">Чекаємо на вас на <span>чашку кави</span> у центрі</h2>
+                <p style="color:#B5AFA6; max-width:460px;">Забронюйте столик для зустрічі, сніданку або спокійної роботи за ноутбуком.</p>
+
+                <ul class="contact-list">
+                    <li>
+                        <span>Адреса</span>
+                        <p>Вірменський провулок, 2, Харків, 61000</p>
+                    </li>
+                    <li>
+                        <span>Телефон</span>
+                        <a href="tel:+380678586583" class="hover-target">+380 67 858 6583</a>
+                    </li>
+                    <li>
+                        <span>Графік роботи</span>
+                        <p>Понеділок — П’ятниця: 08:00 — 20:00</p>
+                        <p>Субота — Неділя: 09:00 — 20:00</p>
+                    </li>
+                    <li>
+                        <span>Навігація &amp; Соцмережі</span>
+                        <div style="display:flex; gap:1.5rem; margin-top:0.3rem;">
+                            <a href="https://www.google.com/maps/place/Rabbit+coffee+place/@49.9883284,36.2337118,17z" target="_blank" class="hover-target">Google Карти ↗</a>
+                            <a href="https://www.instagram.com/rabbit___coffee/" target="_blank" class="hover-target">Instagram ↗</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="booking-form reveal-up">
+                <h3 style="font-family:'Syne', sans-serif; font-size:1.6rem; margin-bottom:1.5rem;">Забронювати столик</h3>
+                <div id="flashMessage" class="flash-msg"></div>
+                <form id="bookingForm" onsubmit="handleBooking(event)">
+                    <div class="form-field">
+                        <label>Ваше ім’я</label>
+                        <input type="text" id="guestName" required placeholder="Олександр">
+                    </div>
+                    <div class="form-field">
+                        <label>Номер телефону</label>
+                        <input type="tel" id="guestPhone" required placeholder="+380 ...">
+                    </div>
+                    <div class="form-field">
+                        <label>Скільки гостей</label>
+                        <select id="guestCount">
+                            <option value="1">1 гість</option>
+                            <option value="2" selected>2 гості</option>
+                            <option value="3-4">3–4 гості</option>
+                            <option value="5+">Компанія 5+ гостей</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label>Дата та час</label>
+                        <input type="text" id="visitTime" required placeholder="Сьогодні о 15:00">
+                    </div>
+                    <button type="submit" class="magnetic-btn hover-target" style="width:100%; justify-content:center; background:var(--accent); color:#fff;">
+                        Підтвердити бронь
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>© 2026 Rabbit Coffee Place · Харків</div>
+            <div>Вірменський провулок, 2</div>
+        </div>
+    </section>
+
+    <script>
+        // 1. Кастомний плавний курсор
+        const dot = document.getElementById('cursorDot');
+        const ring = document.getElementById('cursorRing');
+        let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            dot.style.left = mouseX + 'px';
+            dot.style.top = mouseY + 'px';
+        });
+
+        function animateCursor() {
+            ringX += (mouseX - ringX) * 0.16;
+            ringY += (mouseY - ringY) * 0.16;
+            ring.style.left = ringX + 'px';
+            ring.style.top = ringY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        document.querySelectorAll('.hover-target').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+        });
+
+        // 2. Магнітний ефект для кнопок
+        document.querySelectorAll('.magnetic-btn').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = (e.clientX - rect.left - rect.width / 2) * 0.22;
+                const y = (e.clientY - rect.top - rect.height / 2) * 0.22;
+                btn.style.transform = `translate(${x}px, ${y}px)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0px, 0px)';
+            });
+        });
+
+        // 3. Анімація появи блоків та фото при скролі
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal-up, .photo-card').forEach(el => observer.observe(el));
+
+        // 4. Перемикання вкладок меню
+        function switchTab(event, panelId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.menu-panel').forEach(panel => panel.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.getElementById(panelId).classList.add('active');
+        }
+
+        // 5. Обробка форми бронювання у статичній версії
+        function handleBooking(event) {
+            event.preventDefault();
+            const name = document.getElementById('guestName').value;
+            const guests = document.getElementById('guestCount').value;
+            const time = document.getElementById('visitTime').value;
+            const flash = document.getElementById('flashMessage');
+            flash.textContent = `Дякуємо, ${name}! Заявку на столик (${guests} ос.) на ${time} сформовано. Для миттєвого підтвердження ви також можете зателефонувати нам: +380 67 858 6583.`;
+            flash.style.display = 'block';
+            document.getElementById('bookingForm').reset();
+        }
+    </script>
+</body>
+</html>
